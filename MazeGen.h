@@ -8,14 +8,18 @@
 class MazeGen
 {
 public:
+	MazeGen(); // used to init the vertex data for either the square or lines
+	~MazeGen();
+
 	void setupMaze();
 	void drawMaze();
 
-private:
-	int cols;
-	int rows;
+	//void drawBorder();
 
+private:
 	std::vector<Cell> grid;
-	Renderer ren;
+	Renderer* line;
+	Renderer* square;
+
 };
 

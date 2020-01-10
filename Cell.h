@@ -5,15 +5,24 @@
 class Cell
 {
 public:
+	Cell();
+	Cell(float i, float j);
 
-	Cell(int i, int j);
+	void setWalls(bool wall1, bool wall2, bool wall3, bool wall4);
 
-	void drawCell(Renderer ren);
+	void drawCellLine(Renderer* line, Renderer* sqaure);
 
+	void drawCellSquare(Renderer* ren);
+
+	int index(int i, int j);
+
+	void checkNeighbours();
+
+	bool visted;
 private:
-	int i;
-	int j;
-
-
+	//			     top    left  right  bottom
+	bool walls[4] = { true, true, true, true };
+	float x;
+	float y;
 };
 

@@ -1,8 +1,8 @@
 #include <iostream>
 #include <GL\glew.h>
+
 #include <GLFW\glfw3.h>
 #include "constants.h"
-#include "Renderer.h"
 #include "MazeGen.h"
 
 int main()
@@ -25,22 +25,12 @@ int main()
 	// Initialize game
 
 
-	// DeltaTime variables
-	GLfloat deltaTime = 0.0f;
-	GLfloat lastFrame = 0.0f;
-
 	// Start Game within Menu State
-	//Renderer ren;
-	//ren.initSquare();
-	MazeGen maze;
-	maze.setupMaze();
+	MazeGen* maze = new MazeGen;
+	maze->setupMaze();
 
 	while(!glfwWindowShouldClose(window))
 	{
-		// Calculate delta time
-		GLfloat currentFrame = glfwGetTime();
-		deltaTime = currentFrame - lastFrame;
-		lastFrame = currentFrame;
 		glfwPollEvents();
 		// Manage user input
 
@@ -51,11 +41,12 @@ int main()
 		// Render
 		glClearColor(0.0f, 0.4f, 0.5f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT);
-		//ren.drawSquare(glm::vec2(0, 0), glm::vec2(40, 40), glm::vec3(0.0f, 1.0f, 0.0f));
-		maze.drawMaze();
+		maze->drawMaze();
 		glfwSwapBuffers(window);
 	}
 
 	glfwTerminate();
+	//delete maze;
+
 	return 0;
 }

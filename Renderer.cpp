@@ -32,21 +32,21 @@ void Renderer::initline()
 	glBindVertexArray(0);
 }
 
-void Renderer::drawLine(glm::vec2 position, float sizeX, GLfloat rotate, glm::vec3 color)
+void Renderer::drawLine(glm::vec2 position, glm::vec2 size, glm::vec3 color, GLfloat rotate)
 {
 	GLCALL(glUseProgram(s_Shader));
 
 	glm::mat4 model = glm::mat4(1.0f);
 
-	model = glm::translate(glm::mat4(1.0f), glm::vec3(position.x, position.y, 0.0f)); // position of the box
+	model = glm::translate(glm::mat4(1.0f), glm::vec3(position.x, position.y, 0.0f)); // position of the line
 
-	model = glm::translate(model, glm::vec3(0.5f * sizeX, 0.5f * 0.0f, 0.0f));
-	model = glm::rotate(model, rotate, glm::vec3(0.0f, 0.0f, 1.0f));
-	//model = glm::translate(model, glm::vec3(-0.5f * sizeX, -0.5f * 0, 0.0f));
+	model = glm::rotate(model, glm::radians(rotate), glm::vec3(0.0f, 0.0f, 1.0f)); // rotates the line
+	model = glm::translate(model, glm::vec3(size.x, size.y, 0.0f)); // shifts the position of the box by sizeX again
 
-	model = glm::scale(model, glm::vec3(sizeX, 0.0f, 1.0f));
+	model = glm::scale(model, glm::vec3(size.x, size.y, 0.0f));
 
-	glUniform3f(glGetUniformLocation(s_Shader, "u_Color"), 0.0f, 1.0f, 0.0f);
+
+	glUniform3f(glGetUniformLocation(s_Shader, "u_Color"), color.r, color.g, color.b);
 	glUniformMatrix4fv(glGetUniformLocation(s_Shader, "u_Model"), 1, GL_FALSE, glm::value_ptr(model));
 	glUniformMatrix4fv(glGetUniformLocation(s_Shader, "u_Projection"), 1, GL_FALSE, glm::value_ptr(projection));
 
@@ -103,7 +103,6 @@ void Renderer::drawSquare(glm::vec2 position, glm::vec2 ScaleSize, glm::vec3 col
 	glUniformMatrix4fv(glGetUniformLocation(s_Shader, "u_Projection"), 1, GL_FALSE, glm::value_ptr(projection));
 
 	glBindVertexArray(VAO);
-	glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 	glDrawArrays(GL_TRIANGLES, 0, 6);
 }
 
@@ -137,13 +136,13 @@ void Renderer::initShader()
 	glDeleteShader(vertexShader);
 	glDeleteShader(fragmentShader);
 }
-/*
+
 Renderer::~Renderer()
 {
 	glDeleteBuffers(1, &VBO);
 	glDeleteVertexArrays(1, &VAO);
 	glDeleteProgram(s_Shader);
-}*/
+}
 
 void Renderer::compileShader(unsigned int shader, const char** ppShaderSrc)
 {

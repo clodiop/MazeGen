@@ -19,13 +19,14 @@ public:
 	void initline();
 
 	// actually draws the line, rotation is 0.0f by default
-	void drawLine(glm::vec2 position, float sizeX, GLfloat rotate, glm::vec3 color);
+	void drawLine(glm::vec2 position, glm::vec2 size, glm::vec3 color, GLfloat rotate = 0.0f);
 	//void drawLine(glm::vec2 position, glm::vec3 color, glm::vec2 size, GLfloat rotate = 0.0f);
 
 	void initSquare();
 
 	void drawSquare(glm::vec2 position, glm::vec2 ScaleSize, glm::vec3 color);
 
+	~Renderer();
 private:
 	// initalized the shader with the default shader. ALWAYS DO THIS BEFORE initalizing vertex data
 	void initShader();
