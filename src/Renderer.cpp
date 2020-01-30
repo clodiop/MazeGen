@@ -2,7 +2,7 @@
 
 Renderer::Renderer()
 {
-	projection = glm::ortho(0.0f, WIDTH, HEIGHT, 0.0f, -1.0f, 1.0f);
+	projection = glm::ortho(0.0f, 800.0f, 800.0f, 0.0f, -1.0f, 1.0f);
 	initShader();
 }
 

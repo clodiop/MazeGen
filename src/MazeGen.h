@@ -1,9 +1,10 @@
 #pragma once
 #include <vector>
+#include "Cell.h"
 
 #include "constants.h"
 #include "Renderer.h"
-#include "Cell.h"
+
 
 class MazeGen
 {
@@ -17,9 +18,10 @@ public:
 	//void drawBorder();
 
 private:
+	Cell current;
 	std::vector<Cell> grid;
-	Renderer* line;
-	Renderer* square;
+	Renderer* lineRen;
+	Renderer* squareRen;
 
 };
 

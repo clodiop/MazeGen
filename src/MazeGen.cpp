@@ -2,15 +2,16 @@
 
 MazeGen::MazeGen()
 {
-	line = new Renderer;
-	line->initline();
-	square = new Renderer;
-	square->initSquare();
+	lineRen = new Renderer;
+	lineRen->initline();
+	squareRen = new Renderer;
+	squareRen->initSquare();
 }
 
 MazeGen::~MazeGen()
 {
-	delete line;
+	delete lineRen;
+	delete squareRen;
 }
 
 void MazeGen::setupMaze()
@@ -21,29 +22,31 @@ void MazeGen::setupMaze()
 	for(int j = 0; j < cols; j++) {
 
 		for(int i = 0; i < rows; i++) {
-			Cell cell(i, j);
+			Cell cell(i, j, i + j);
 			grid.push_back(cell);
 		}
 
 	}
+	current = grid[0];
 }
 
 void MazeGen::drawMaze()
 {
-
-	grid[0].visted = true;
+	static int kkj = 1;
+	// draws the grid and the sqaures indicating the gen bot ting
 	for(int i = 0; i < grid.size(); i++) {
-		grid[i].drawCellLine(line, square);
+		grid.at(i).drawCell(lineRen, 1.0f);
 	}
 
+	current.visted = true;
+	current.highlight(squareRen);
 
+	int nextIndex = current.checkNeighbours(grid);
+	if(nextIndex != -1) {
+		grid[nextIndex].visted = true;
+
+		current.removeWalls(grid[nextIndex]);
+		current = grid[nextIndex];
+	}
 }
 
-/**
-void MazeGen::drawBorder()
-{
-	ren.drawLine(glm::vec2(20, 20), glm::vec2(380, 0), glm::vec3(1.0f, 1.0f, 1.0f)); // TOP line
-	ren.drawLine(glm::vec2(20, 780), glm::vec2(380, 0), glm::vec3(1.0f, 1.0f, 1.0f)); // Bottom line
-	ren.drawLine(glm::vec2(20, 20), glm::vec2(380, 0), glm::vec3(1.0f, 1.0f, 1.0f), 90.0f);  // left line
-	ren.drawLine(glm::vec2(780, 20), glm::vec2(380, 0), glm::vec3(1.0f, 1.0f, 1.0f), 90.0f); // right Line
-}*/
