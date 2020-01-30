@@ -32,7 +32,6 @@ void MazeGen::setupMaze()
 
 void MazeGen::drawMaze()
 {
-	static int kkj = 1;
 	// draws the grid and the sqaures indicating the gen bot ting
 	for(int i = 0; i < grid.size(); i++) {
 		grid.at(i).drawCell(lineRen, 1.0f);
