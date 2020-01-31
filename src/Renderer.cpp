@@ -94,7 +94,7 @@ void Renderer::drawSquare(glm::vec2 position, glm::vec2 ScaleSize, glm::vec3 col
 
 	model = glm::translate(glm::mat4(1.0f), glm::vec3(position.x, position.y, 0.0f)); // sets the position of the square
 
-	model = glm::translate(model, glm::vec3(0.5f * ScaleSize.x, 0.5f * ScaleSize.y, 0.0f)); // take the scaling into account
+	model = glm::translate(model, glm::vec3(ScaleSize.x, ScaleSize.y, 0.0f)); // moves the square more to take scaling into account
 
 	model = glm::scale(model, glm::vec3(ScaleSize.x, ScaleSize.y, 1.0f)); // scales the square
 

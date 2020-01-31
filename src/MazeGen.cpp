@@ -44,7 +44,6 @@ void MazeGen::drawMaze()
 		grid.at(i).drawCell(lineRen, 1.0f);
 	}
 
-	//current.drawCellT(lineRen, 0.0f);
 	current.highlight(squareRen);
 
 	int nextIndex = current.checkNeighbours(grid);

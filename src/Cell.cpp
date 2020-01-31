@@ -30,39 +30,6 @@ void Cell::drawCell(Renderer* line, float i)
 	if(walls[3] == true) { // left
 		line->drawLine(glm::vec2(x, y), glm::vec2(cellWidth / 2, 0), glm::vec3(i, 1.0f, i), 90.0f);//left side
 	}
-
-	printf("%f walls[%d,%d,%d,%d] \n", i, this->walls[0], this->walls[1], this->walls[2], this->walls[3]);
-
-}
-
-void Cell::setWalls(bool wall0, bool wall1, bool wall2, bool wall3)
-{
-	walls[0] = wall0;
-	walls[1] = wall1;
-	walls[2] = wall2;
-	walls[3] = wall3;
-}
-
-void Cell::drawCellT(Renderer* line, float i)
-{
-	int x = this->x * cellWidth;
-	int y = this->y * cellWidth;
-
-	printf("%f walls[%d,%d,%d,%d] \n", i, this->walls[0], this->walls[1], this->walls[2], this->walls[3]);
-
-	if(walls[0] == false) { // top
-		line->drawLine(glm::vec2(x, y), glm::vec2(cellWidth / 2, 0), glm::vec3(0.0f, 1.0f, 0.0f)); // top
-		//^^^^^^^ i did `cellWidth / 2` because the line x vertex data is -1 to 1 so its a length of 2 so if you didnt divide it then it will 20(default cellwidth) will end up scalled to 40. 20*2=40
-	}
-	if(walls[1] == false) { // right
-		line->drawLine(glm::vec2(x + cellWidth, y), glm::vec2(cellWidth / 2, 0), glm::vec3(0.0f, 1.0f, 0.0f), 90.0f);// right siede
-	}
-	if(walls[2] == false) { // botom
-		line->drawLine(glm::vec2(x, y + cellWidth), glm::vec2(cellWidth / 2, 0), glm::vec3(0.0f, 1.0f, 0.0f)); // bottom
-	}
-	if(walls[3] == false) { // left
-		line->drawLine(glm::vec2(x, y), glm::vec2(cellWidth / 2, 0), glm::vec3(0.0f, 1.0f, 0.0f), 90.0f);//left side
-	}
 }
 
 int Cell::index(int i, int j)
@@ -94,9 +61,6 @@ void Cell::removeWalls(Cell& nextCell)
 		this->walls[2] = false; // removes the bottom
 		nextCell.walls[0] = false; // removes top
 	}
-
-	printf("removewall : current [%d,%d,%d,%d]", this->walls[0], this->walls[1], this->walls[2], this->walls[3]);
-	printf(" removewall :  grid [%d,%d,%d,%d]\n", nextCell.walls[0], nextCell.walls[1], nextCell.walls[2], nextCell.walls[3]);
 }
 
 void Cell::highlight(Renderer* sqaure)
