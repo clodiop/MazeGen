@@ -19,6 +19,7 @@ public:
 
 private:
 	Cell current;
+	int currentIndex;
 	std::vector<Cell> grid;
 	Renderer* lineRen;
 	Renderer* squareRen;

@@ -1,6 +1,6 @@
 #pragma once
 
-constexpr float HEIGHT{ 400 };
-constexpr float WIDTH{ 400 };
+constexpr float HEIGHT{ 100 };
+constexpr float WIDTH{ 100 };
 
 constexpr int cellWidth{ 20 };

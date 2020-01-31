@@ -11,6 +11,8 @@ public:
 
 	void drawCell(Renderer* line, float i);
 
+	void setWalls(bool wall0, bool wall1, bool wall2, bool wall3);
+
 	void drawCellT(Renderer* line, float i);
 	inline int index(int i, int j);
 
@@ -27,7 +29,7 @@ private:
 	// top	right	bottom	left
 	bool walls[4];
 	int ID;
-	int cols = WIDTH / cellWidth;
-	int rows = HEIGHT / cellWidth;
+	int cols;
+	int rows;
 };
 

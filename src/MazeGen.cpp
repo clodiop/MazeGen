@@ -27,17 +27,24 @@ void MazeGen::setupMaze()
 		}
 
 	}
+	grid[0].visted = true;
+	currentIndex = 0;
 	current = grid[0];
+	//             top	right	bottom	left
+	/*grid[0].setWalls(true, true, false, true);
+	grid[5].setWalls(false, false, false, true);
+	grid[6].setWalls(true, true, false, false);*/
 }
 
 void MazeGen::drawMaze()
 {
+
 	// draws the grid and the sqaures indicating the gen bot ting
 	for(int i = 0; i < grid.size(); i++) {
 		grid.at(i).drawCell(lineRen, 1.0f);
 	}
 
-	current.visted = true;
+	//current.drawCellT(lineRen, 0.0f);
 	current.highlight(squareRen);
 
 	int nextIndex = current.checkNeighbours(grid);
@@ -45,6 +52,8 @@ void MazeGen::drawMaze()
 		grid[nextIndex].visted = true;
 
 		current.removeWalls(grid[nextIndex]);
+		grid[currentIndex] = current;
+		currentIndex = nextIndex;
 		current = grid[nextIndex];
 	}
 }
