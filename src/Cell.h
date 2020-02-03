@@ -1,7 +1,7 @@
-#pragma once
+﻿#pragma once
 #include "constants.h"
 #include "Renderer.h"
-
+#include <ctime>
 
 class Cell
 {
@@ -29,4 +29,3 @@ private:
 	int cols;
 	int rows;
 };
-

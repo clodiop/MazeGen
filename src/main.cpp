@@ -1,4 +1,4 @@
-#include <iostream>
+﻿#include <iostream>
 #include <GL\glew.h>
 
 #include <GLFW\glfw3.h>
@@ -17,7 +17,7 @@ int main()
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 	glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
 
-	GLFWwindow* window = glfwCreateWindow(800, 800, "MAZE", nullptr, nullptr);
+	GLFWwindow* window = glfwCreateWindow(WINDOW_WIDTH, WINDOW_HEIGHT, "MAZE", nullptr, nullptr);
 	if(!window)
 	{
 		glfwTerminate();
@@ -29,7 +29,7 @@ int main()
 	glGetError(); // Call it once to catch glewInit() bug, all other errors are now from our application.
 
 	// OpenGL configuration
-	glViewport(0, 0, 800, 800);
+	glViewport(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT);
 
 	MazeGen* maze = new MazeGen;
 	maze->setupMaze();

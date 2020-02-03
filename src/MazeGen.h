@@ -1,7 +1,8 @@
-#pragma once
+﻿#pragma once
 #include <vector>
 #include "Cell.h"
 
+#include <queue>
 #include "constants.h"
 #include "Renderer.h"
 
@@ -24,5 +25,6 @@ private:
 	Renderer* lineRen;
 	Renderer* squareRen;
 
+	// for backtracking
+	std::queue<Cell> queue;
 };
-

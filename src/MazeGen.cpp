@@ -1,4 +1,4 @@
-#include "MazeGen.h"
+﻿#include "MazeGen.h"
 
 MazeGen::MazeGen()
 {
@@ -30,18 +30,13 @@ void MazeGen::setupMaze()
 	grid[0].visted = true;
 	currentIndex = 0;
 	current = grid[0];
-	//             top	right	bottom	left
-	/*grid[0].setWalls(true, true, false, true);
-	grid[5].setWalls(false, false, false, true);
-	grid[6].setWalls(true, true, false, false);*/
 }
 
 void MazeGen::drawMaze()
 {
-
 	// draws the grid and the sqaures indicating the gen bot ting
 	for(int i = 0; i < grid.size(); i++) {
-		grid.at(i).drawCell(lineRen, 1.0f);
+		grid.at(i).drawCell(lineRen, 0.0f);
 	}
 
 	current.highlight(squareRen);
@@ -50,10 +45,18 @@ void MazeGen::drawMaze()
 	if(nextIndex != -1) {
 		grid[nextIndex].visted = true;
 
+		queue.push(current);
+
 		current.removeWalls(grid[nextIndex]);
 		grid[currentIndex] = current;
 		currentIndex = nextIndex;
 		current = grid[nextIndex];
 	}
-}
+	else if(!queue.empty()) { // checks if the stack is not empty
 
+		Cell cell = queue.front();
+		queue.pop();
+
+		current = cell;
+	}
+}

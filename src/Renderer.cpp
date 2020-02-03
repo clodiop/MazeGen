@@ -1,7 +1,8 @@
-#include "Renderer.h"
+﻿#include "Renderer.h"
 
 Renderer::Renderer()
 {
+	// TODO  set ortho height and width via constnat
 	projection = glm::ortho(0.0f, 800.0f, 800.0f, 0.0f, -1.0f, 1.0f);
 	initShader();
 }
@@ -41,7 +42,7 @@ void Renderer::drawLine(glm::vec2 position, glm::vec2 size, glm::vec3 color, GLf
 	model = glm::translate(glm::mat4(1.0f), glm::vec3(position.x, position.y, 0.0f)); // position of the line
 
 	model = glm::rotate(model, glm::radians(rotate), glm::vec3(0.0f, 0.0f, 1.0f)); // rotates the line
-	model = glm::translate(model, glm::vec3(size.x, size.y, 0.0f)); // shifts the position of the box by sizeX again
+	model = glm::translate(model, glm::vec3(size.x, size.y, 0.0f)); // Take scaling into account
 
 	model = glm::scale(model, glm::vec3(size.x, size.y, 0.0f));
 
@@ -175,8 +176,8 @@ void Renderer::linkProgram(unsigned int vertexShader, unsigned int fragmentShade
 	{
 		char infoLog[512];
 		glGetShaderInfoLog(s_Shader, 512, nullptr, infoLog);
-		//LOG_ERROR("Failed to link Program. InfoLog:\n{0}", infoLog);
 		__debugbreak();
+
 	}
 #endif
 }
