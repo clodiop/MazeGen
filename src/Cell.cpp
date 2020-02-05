@@ -1,44 +1,40 @@
 ﻿#include "Cell.h"
 
 
-Cell::Cell() : x(0), y(0), visted(false), walls{ true, true, true, true }, ID(666)
+Cell::Cell() : x(0), y(0), visted(false), walls{ true, true, true, true }, ID("INVALID")
 {
-	cols = WIDTH / cellWidth;
-	rows = HEIGHT / cellWidth;
 }
 
-Cell::Cell(float i, float j, int id) : x(i), y(j), visted(false), walls{ true, true, true, true }, ID(id)
+Cell::Cell(float i, float j, std::string id) : x(i), y(j), visted(false), walls{ true, true, true, true }, ID(id)
 {
-	cols = WIDTH / cellWidth;
-	rows = HEIGHT / cellWidth;
 }
 
-void Cell::drawCell(Renderer* line, float i)
+void Cell::drawLineCell(Renderer* line)
 {
-	int x = this->x * cellWidth;
-	int y = this->y * cellWidth;
+	int x = this->x * CELL_WIDTH;
+	int y = this->y * CELL_WIDTH;
 
 	if(walls[0] == true) { // top
-		line->drawLine(glm::vec2(x, y), glm::vec2(cellWidth / 2, 0), glm::vec3(1.0f, 1.0f, i)); // top
+		line->drawLine(glm::vec2(x, y), glm::vec2(CELL_WIDTH / 2, 0), LINE_COLOR); // top
 		//^^^^^^^ i did `cellWidth / 2` because the line x vertex data is -1 to 1 so its a length of 2 so if you didnt divide it then it will 20(default cellwidth) will end up scalled to 40. 20*2=40
 	}
 	if(walls[1] == true) { // right
-		line->drawLine(glm::vec2(x + cellWidth, y), glm::vec2(cellWidth / 2, 0), glm::vec3(1.0f, 1.0f, i), 90.0f);// right siede
+		line->drawLine(glm::vec2(x + CELL_WIDTH, y), glm::vec2(CELL_WIDTH / 2, 0), LINE_COLOR, 90.0f);// right siede
 	}
 	if(walls[2] == true) { // botom
-		line->drawLine(glm::vec2(x, y + cellWidth), glm::vec2(cellWidth / 2, 0), glm::vec3(1.0f, 1.0f, i)); // bottom
+		line->drawLine(glm::vec2(x, y + CELL_WIDTH), glm::vec2(CELL_WIDTH / 2, 0), LINE_COLOR); // bottom
 	}
 	if(walls[3] == true) { // left
-		line->drawLine(glm::vec2(x, y), glm::vec2(cellWidth / 2, 0), glm::vec3(1.0f, 1.0f, i), 90.0f);//left side
+		line->drawLine(glm::vec2(x, y), glm::vec2(CELL_WIDTH / 2, 0), LINE_COLOR, 90.0f);//left side
 	}
 }
 
-int Cell::index(int i, int j)
+int Cell::index(int x, int y)
 {
-	if(i < 0 || j < 0 || i > cols - 1 || j > rows - 1)
+	if(x < 0 || y < 0 || x > COLS - 1 || y > ROWS - 1)
 		return -1;
 
-	return i + j * cols;
+	return x + y * COLS;
 }
 
 void Cell::removeWalls(Cell& nextCell)
@@ -64,11 +60,9 @@ void Cell::removeWalls(Cell& nextCell)
 	}
 }
 
-void Cell::highlight(Renderer* sqaure)
+void Cell::highlight(Renderer* sqaure, glm::vec3 squareColor, glm::vec2 squareScale)
 {
-	if(this->valid == true) {
-		sqaure->drawSquare(glm::vec2((this->x * cellWidth), (this->y * cellWidth)), glm::vec2(10, 10), glm::vec3(0.0f, 1.0f, 0.0f));
-	}
+	sqaure->drawSquare(glm::vec2((this->x * CELL_WIDTH), (this->y * CELL_WIDTH)), squareScale, squareColor);
 }
 
 int Cell::checkNeighbours(std::vector<Cell>& grid)
@@ -108,12 +102,9 @@ int Cell::checkNeighbours(std::vector<Cell>& grid)
 #if _DEBUG
 		// debug bit
 #else
-		// release bit
+		std::srand(static_cast<unsigned int>(std::time(nullptr)));
 		// Sets the seed so the maze is different every time
 #endif
-		std::srand(static_cast<unsigned int>(std::time(nullptr)));
-
-
 		int randomInt = rand() % neighbors.size();
 		return neighbors[randomInt];
 	}

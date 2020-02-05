@@ -3,7 +3,7 @@
 Renderer::Renderer()
 {
 	// TODO  set ortho height and width via constnat
-	projection = glm::ortho(0.0f, 800.0f, 800.0f, 0.0f, -1.0f, 1.0f);
+	projection = glm::ortho(0.0f, WINDOW_WIDTH, WINDOW_HEIGHT, 0.0f, -1.0f, 1.0f);
 	initShader();
 }
 
@@ -93,7 +93,7 @@ void Renderer::drawSquare(glm::vec2 position, glm::vec2 ScaleSize, glm::vec3 col
 
 	glm::mat4 model = glm::mat4(1.0f);
 
-	model = glm::translate(glm::mat4(1.0f), glm::vec3(position.x, position.y, 0.0f)); // sets the position of the square
+	model = glm::translate(model, glm::vec3(position.x, position.y, 0.0f)); // sets the position of the square
 
 	model = glm::translate(model, glm::vec3(ScaleSize.x, ScaleSize.y, 0.0f)); // moves the square more to take scaling into account
 

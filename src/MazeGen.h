@@ -1,11 +1,11 @@
 ﻿#pragma once
 #include <vector>
 #include "Cell.h"
-
+#include <string> 
 #include <queue>
 #include "constants.h"
 #include "Renderer.h"
-
+#include <utility>
 
 class MazeGen
 {
@@ -16,8 +16,6 @@ public:
 	void setupMaze();
 	void drawMaze();
 
-	//void drawBorder();
-
 private:
 	Cell current;
 	int currentIndex;
@@ -26,5 +24,5 @@ private:
 	Renderer* squareRen;
 
 	// for backtracking
-	std::queue<Cell> queue;
+	std::queue<std::pair<Cell, int>> queue;
 };
