@@ -12,3 +12,5 @@ C++ opengl maze generator
 ## Youtube video used that explained the algorithm.
 
 https://www.youtube.com/watch?v=8Ju_uxJ9v44&t=3s
+
+Subscribe to the guy that made this video btw hes awesome^^^^
