@@ -9,7 +9,7 @@ C++ opengl maze generator
 ## Things that i may do:
 * Improve Performace 
 
-## Image of a generated Maze made from MazeGen :)
+## Image of a generated Maze made from the MazeGen :)
 
 ![app screenshot](https://raw.githubusercontent.com/danieljo12/MazeGen/master/image.png)
 
