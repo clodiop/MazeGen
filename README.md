@@ -19,7 +19,7 @@ The light blue line is not apart of the application. Its just to indicate that i
 
 In the constants.h file you can change the window size, Size of the generated maze
 
-## Youtube video used that explained the algorithm.
+## Youtube video used that explained the algorithms.
 
 https://www.youtube.com/watch?v=8Ju_uxJ9v44&t=3s
 
