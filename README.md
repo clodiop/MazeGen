@@ -13,6 +13,8 @@ C++ opengl maze generator
 
 ![app screenshot](https://raw.githubusercontent.com/danieljo12/MazeGen/master/image.png)
 
+The light blue line is not apart of the application. Its just to indicate that it actually gens working mazes
+
 ## How to change MazeGen Generated values
 
 In the constants.h file you can change the window size, Size of the generated maze
